@@ -34,7 +34,7 @@ public class RegistroFragment extends Fragment {
     Button btnGuardarPelicula, btnResetPelicula;
     RequestQueue requestQueue; // Cola de solicitudes
 
-    private final String URL = "http://192.168.101.15:3000/api/peliculas/";
+    private final String URL = "http://192.168.18.40:3000/api/peliculas/";
 
     EditText edtTitulo, edtDuracion, edtLanzamiento;
 
@@ -66,7 +66,7 @@ public class RegistroFragment extends Fragment {
         //Obtenemos el genero
 
         spinner = view.findViewById(R.id.spinnerGeneros);
-        String[] opciones = {"animado", "drama", "comedia", "accion", "terror"};
+        String[] opciones = {"Animado", "Drama", "Comedia", "Accion", "Terror"};
         // Programacion del spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 requireContext(),

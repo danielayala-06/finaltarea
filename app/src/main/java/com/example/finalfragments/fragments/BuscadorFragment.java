@@ -28,7 +28,7 @@ public class BuscadorFragment extends Fragment {
 
     RequestQueue requestQueue; // Cola de solicitudes
 
-    private final String URL = "http://192.168.101.15:3000/api/peliculas/";
+    private final String URL = "http://192.168.18.40:3000/api/peliculas/";
 
     EditText edtIdH, edtTituloH, edtDuracionH, edtGeneroH, edtLanzamientoH;
 
@@ -70,8 +70,13 @@ public class BuscadorFragment extends Fragment {
     }
 
     public void buscarPeli(){
-        int idpeli = Integer.parseInt(edtIdH.getText().toString());
-        String endpoint = URL + String.valueOf(idpeli);
+        String idStr = edtIdH.getText().toString().trim();
+        if (idStr.isEmpty()) {
+            Toast.makeText(getContext(), "Ingresa un ID", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int idpeli = Integer.parseInt(idStr);
+        String endpoint = URL + idpeli;
 
         try {
             requestQueue = Volley.newRequestQueue(requireContext().getApplicationContext());
@@ -107,6 +112,11 @@ public class BuscadorFragment extends Fragment {
                         public void onErrorResponse(VolleyError volleyError) {
                             NetworkResponse response = volleyError.networkResponse;
 
+                            if (response == null) {
+                                Toast.makeText(getContext(), "Error de red o sin conexión", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+
                             int statusCode = response.statusCode;
                             // Contenido (String)
                             String messageJSON = new String(response.data);
@@ -134,8 +144,13 @@ public class BuscadorFragment extends Fragment {
     }
 
     public void actualizarPeli(){
-        int idpeli = Integer.parseInt(edtIdH.getText().toString());
-        String endpoint = URL + String.valueOf(idpeli);
+        String idStr = edtIdH.getText().toString().trim();
+        if (idStr.isEmpty()) {
+            Toast.makeText(getContext(), "Ingresa un ID", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int idpeli = Integer.parseInt(idStr);
+        String endpoint = URL + idpeli;
         try {
             // Obtenemos los datos de los edittext
             JSONObject data = new JSONObject();
@@ -168,6 +183,11 @@ public class BuscadorFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
                             NetworkResponse response = volleyError.networkResponse;
+
+                            if (response == null) {
+                                Toast.makeText(getContext(), "Error de red o sin conexión", Toast.LENGTH_LONG).show();
+                                return;
+                            }
 
                             int statusCode = response.statusCode;
                             // Contenido (String)

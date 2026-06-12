@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /home/daniel-ayala/Documentos/wsPelicula -type f | sort)",
+      "Read(//home/daniel-ayala/Documentos/wsPelicula/**)"
+    ]
+  }
+}
